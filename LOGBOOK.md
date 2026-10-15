@@ -72,3 +72,14 @@
 - Git commit: document commit `242efb27e2df9efe380b535a9fcb780a7b81c925`; paired Git-logbook commit is this commit.
 - Status: PROPOSED DOCUMENT ONLY; pending Obsidian mirror/readback; product NOT IMPLEMENTED.
 - Next: paired Obsidian note/event, verify both logs and draft, route dependency decisions to Requirements/Architecture workstream before P05 implementation.
+
+### CTMM-20261016-011 — GUI/TRAY DISCOVERY COMPARISON AND TEST GATES
+- Time: 2026-10-16 04:09:54 Asia/Bangkok; actor: ChatGPT GUI/Tray workstream via GitHub + Ubun.
+- Scope: official-doc comparison Slint/Tauri/GTK4/Qt6/egui/iced, status/tray UX, headless IPC contract, negative acceptance matrix and rollback; NO ADR accepted, code or runtime change.
+- Git paths: `docs/research/GUI-TRAY-DISCOVERY-2026-10-16.md`, `LOGBOOK.md`.
+- Obsidian paths: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Research/GUI-Tray-Discovery-2026-10-16.md`, `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Logbook.md`.
+- Requirements/ADR: V1-R07/R08/R09, Q03/Q06/Q07/Q08, D-ARCH-02/05/06/07 OPEN; P00/P06.
+- Tests/evidence: current vendor/API docs URLs in research note; no GUI build/test, service or tunnel E2E (NOT RUN). Paired logs consistent through previous entry before this write.
+- Status: RESEARCH / PROPOSED; Rust service unaffected; production NOT IMPLEMENTED.
+- Git commit: this commit.
+- Next: obtain accepted GUI+IPC ADR and isolate mock snapshot tests; no importing old C PoC.
