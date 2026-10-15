@@ -181,3 +181,13 @@
 - Status: cross-workstream event collision clarified; dual logbook readback/checkpoint needs mirrored Obsidian event and final verification; ADRs PROPOSED; code/runtime NOT IMPLEMENTED/NOT TESTED; P01+ gate still BLOCKED.
 - Next: append paired Obsidian note/log/state with actual Git SHA and read both sides; submit ADR-003/004/006 alternatives to operator for explicit choice, not automatic approval. Isolated E2E requires separate execution authorization.
 
+### CTMM-20261016-080 — QA SECURITY THREAT MODEL AND TRUST-BOUNDARY CONTRACT
+- Time: 2026-10-16 04:38:08 Asia/Bangkok; actor: ChatGPT / QA-Security-Release workstream via authorized GitHub+Obsidian connectors.
+- Scope/action: documented P00-01D CTMM V1 trust zones TB-01..08, protected assets/principals, initial abuse risks TM-01..18, security invariants SEC-01..12 and isolated planned negative cases QA-TM-01..20; reconciled user-confirmed Q03A–Q08A and cross-workstream Self-management/Registry contracts. Architecture decisions remain PROPOSED; no implementation/test authorization.
+- Git paths: docs/security/THREAT-MODEL-V1-PROPOSAL.md; LOGBOOK.md.
+- Obsidian paths: 20_Projects/Active/Chatgpt-tunnel-mcp-manager/Security/Threat-Model-V1.md; 20_Projects/Active/Chatgpt-tunnel-mcp-manager/Logbook.md; 20_Projects/Active/Chatgpt-tunnel-mcp-manager/Project-State.md.
+- Requirements/tasks: V1-R01..R09; CTMM-TASK-P00-01D; Q03A..Q08A confirmed, ADR-CTMM-001..007 still PROPOSED. P01+ implementation BLOCKED.
+- Evidence/tests: reviewed current Git requirements/ADR/self-management/registry files, Git HEAD/logbook and Obsidian records; consulted official OpenAI tunnel, MCP and RBAC docs. Documentation-only inspection. QA-TM-01..20, authz, Rust, CI, tunnel, GUI, release/rollback/E2E tests NOT RUN. No binary, key, profile, port, production tunnel/proxy/service or OS configuration modified.
+- Status: PROPOSED SECURITY DOCUMENT, P00-01D RESEARCH_DOCUMENTED (subject to mirror readback); product NOT IMPLEMENTED. Paired Obsidian note/log/state and SHA verification pending.
+- Git commit: this commit.
+- Next: mirror Obsidian note/event, verify SHA and both logbooks; hand off TB-04/06 approval and boot-secrets questions to ADR-CTMM-003/004/006; design fixture/evidence contract QA-P00-02, no running tests before explicit permission.
