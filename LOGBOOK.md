@@ -95,3 +95,14 @@
 - Git commit: this commit.
 - Status: PROPOSED; application NOT IMPLEMENTED, interoperability NOT VERIFIED; dual-log Obsidian mirror to follow.
 - Next: PM/Architecture decide protocol/security/SDK and P00 scope; approve ADR before coding and isolated test fixtures.
+
+### CTMM-20261016-020 — CONFIRMED DISCOVERY CHOICES AND PROPOSED ADR PACK
+- Time: 2026-10-16 04:18 Asia/Bangkok; actor: ChatGPT, Requirements/Architecture workstream using authorized GitHub/Ubun connectors.
+- Scope/action: Received user answers Q03A/Q04A/Q05A/Q06A/Q07A/Q08A; CONFIRMED product requirements (system-boot service before login; pinned verified tunnel with approved upgrade; AI propose + human approval per mutation; GUI/tray Ubuntu a V1 release MUST; one aggregated ChatGPT-facing endpoint; isolated E2E only after Discovery plus separate authorization). Analyzed conflict with early GUI-optional release map, boot secret-store, multi-MCP and 2026-07-28 protocol boundary. Drafted seven ADR candidates as PROPOSED, no implementation technology accepted and no runtime access granted.
+- Git paths changed: `docs/requirements/V1-Q03-Q08-CONFIRMED.md`, `docs/adr/PROPOSED-ADR-CTMM-001-007.md`, `LOGBOOK.md`.
+- Obsidian paths in paired change-set: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Requirements/Discovery-Q03-Q08-2026-10-16.md`, `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Requirements/Questions.md`, `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Project-State.md`, `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Logbook.md`.
+- Related: V1-R01..R09; Q03..Q08 product choices only; ADR-CTMM-001..007 PROPOSED; CTMM-TASK-P00-01C; Ubuntu V1 release now gates on both P06 GUI and P07 operations; early headless P01–P05 do NOT depend on GUI.
+- Pre-state/evidence: inspected current Git/Obsidian logbooks through CTMM-20261016-012, Git research for proxy/GUI/registry, USES project rules and official OpenAI Secure MCP Tunnel + MCP 2026-07-28 docs. Verified pre-existing source notes; technical ADRs remain OPEN. Requirements and ADR proposal document Git commits: `b08766f6c4deabfd3bd4f24eb4eb261948498461`, `a77149994072ce0ded773e2de0395b65cc80384d`.
+- Tests: documentation reasoning and file-read checks only; build/service, account entitlement, tunnel/mock E2E, proxy, GUI, auth, security and rollback tests NOT RUN. No credentials recorded or active tunnel/proxy/service changed.
+- Status: Q03A..Q08A REQUIREMENTS CONFIRMED, details/architecture OPEN; ADRs PROPOSED NOT ACCEPTED; product NOT IMPLEMENTED; P01+ BLOCKED. Git commit: this commit.
+- Pending/next: mirror exact event and resulting Git SHA to Obsidian, read back both logbooks and notes, review service identity/secret trust, user approve ADR alternatives and separately approve isolated tests before execution.
