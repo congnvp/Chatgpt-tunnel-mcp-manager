@@ -139,6 +139,6 @@
 - Obsidian paired paths: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Architecture/Self-Management-MCP-Proposal.md`, `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Logbook.md`.
 - Requirements/tasks: V1-R04/R06/R08/R09; Q03A/Q05A/Q07A; P03/P05; SM-D01..04 OPEN; ADR-CTMM-004/006 PROPOSED; no approval or E2E execution.
 - Evidence: official spec/docs read and schema structure checked prior to commit; JSON Schema conformance suites, Rust build, mock E2E, authz/rollback/negative cases NOT RUN; no active tunnel/proxy/service and no secrets touched.
-- Status: PROPOSED DOCUMENT ONLY; product NOT IMPLEMENTED; Git+Obsidian paired readback required.
+- Status: SYNC_PENDING — proposed documentation committed and Obsidian architecture note created, but the mandatory Obsidian `Logbook.md` event append was blocked by intermittent connector initialization/safety failures; Git docs and JSON Schema readback succeeded. Product NOT IMPLEMENTED. Do NOT mark dual-log VERIFIED until the paired Obsidian event is appended and both logs are reread.
 - git_commit: this commit.
 - Next: mirror Obsidian note/event with actual SHA, re-read both logbooks; seek ADR-CTMM-004/006 selection before implementation.
