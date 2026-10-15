@@ -130,3 +130,15 @@
 - Git commit: document commit; paired Git LOGBOOK commit is this commit.
 - Status: DOC RESEARCH ONLY / Rust E2E compatibility UNVERIFIED / ADR PROPOSED; paired Obsidian readback pending.
 - Next: independent review 01B findings; decide the ADR after sandbox compatibility tests are approved. No P01/P02 implementation before approvals.
+
+
+### CTMM-20261016-030 — SELF-MANAGEMENT MCP CONTRACT AND NEGATIVE TEST PLAN
+- Time: 2026-10-16 04:24 Asia/Bangkok; actor: ChatGPT / Self-management MCP workstream via GitHub and Obsidian.
+- Scope/action: inspect baseline+confirmed Q03A/Q05A/Q07A, proposed ADR-CTMM-002/004/005/006, Registry/Settings and official MCP 2026-07-28/tunnel documentation; propose P03 read-only tools, P05 staged propose/local-approve/apply, formal JSON Schema, privacy/permission matrix, offline fallback, fault cases SM-01..24. No ADR accepted, application code or service action.
+- Git paths: `docs/architecture/SELF-MANAGEMENT-MCP-PROPOSAL.md`, `docs/contracts/self-management-mcp-v1.schema.json`, `LOGBOOK.md`.
+- Obsidian paired paths: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Architecture/Self-Management-MCP-Proposal.md`, `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Logbook.md`.
+- Requirements/tasks: V1-R04/R06/R08/R09; Q03A/Q05A/Q07A; P03/P05; SM-D01..04 OPEN; ADR-CTMM-004/006 PROPOSED; no approval or E2E execution.
+- Evidence: official spec/docs read and schema structure checked prior to commit; JSON Schema conformance suites, Rust build, mock E2E, authz/rollback/negative cases NOT RUN; no active tunnel/proxy/service and no secrets touched.
+- Status: PROPOSED DOCUMENT ONLY; product NOT IMPLEMENTED; Git+Obsidian paired readback required.
+- git_commit: this commit.
+- Next: mirror Obsidian note/event with actual SHA, re-read both logbooks; seek ADR-CTMM-004/006 selection before implementation.

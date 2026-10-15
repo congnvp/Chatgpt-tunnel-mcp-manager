@@ -1,0 +1,881 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/congnvp/Chatgpt-tunnel-mcp-manager/blob/main/docs/contracts/self-management-mcp-v1.schema.json",
+  "title": "CTMM Self-management MCP contract — proposal, not implemented",
+  "$defs": {
+    "Freshness": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "fresh",
+            "stale",
+            "unknown"
+          ]
+        },
+        "age_ms": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      },
+      "required": [
+        "state",
+        "age_ms"
+      ],
+      "additionalProperties": false
+    },
+    "SafeError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "component": {
+          "type": "string",
+          "enum": [
+            "manager",
+            "service",
+            "tunnel",
+            "proxy",
+            "registry",
+            "server"
+          ]
+        },
+        "safe_message": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "retryable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "component",
+        "safe_message",
+        "retryable"
+      ],
+      "additionalProperties": false
+    },
+    "ComponentStatus": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "STOPPED",
+            "STARTING",
+            "CONNECTING",
+            "READY",
+            "DEGRADED",
+            "OFFLINE",
+            "FAILED",
+            "UNKNOWN"
+          ]
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reason_code": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 80
+        }
+      },
+      "required": [
+        "state",
+        "observed_at",
+        "reason_code"
+      ],
+      "additionalProperties": false
+    },
+    "ManagerStatusInput": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+    },
+    "ManagerDiagnosticsInput": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "type": "string",
+          "enum": [
+            "all",
+            "service",
+            "tunnel",
+            "proxy",
+            "registry",
+            "server"
+          ]
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "cursor": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "ManagerListServersInput": {
+      "type": "object",
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{1,63}$"
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "cursor": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "include_disabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "ManagerSelftestInput": {
+      "type": "object",
+      "properties": {
+        "suite": {
+          "type": "string",
+          "enum": [
+            "local_contract",
+            "registry_integrity",
+            "snapshot_freshness"
+          ]
+        }
+      },
+      "required": [
+        "suite"
+      ],
+      "additionalProperties": false
+    },
+    "ManagerProposeChangeInput": {
+      "type": "object",
+      "properties": {
+        "expected_revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "idempotency_key": {
+          "type": "string",
+          "minLength": 16,
+          "maxLength": 128
+        },
+        "change": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AddChange"
+            },
+            {
+              "$ref": "#/$defs/ToggleChange"
+            }
+          ]
+        }
+      },
+      "required": [
+        "expected_revision",
+        "idempotency_key",
+        "change"
+      ],
+      "additionalProperties": false
+    },
+    "AddChange": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "add"
+        },
+        "profile_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{1,63}$"
+        },
+        "draft_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "kind",
+        "profile_id",
+        "draft_id"
+      ],
+      "additionalProperties": false
+    },
+    "ToggleChange": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "enable",
+            "disable"
+          ]
+        },
+        "profile_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{1,63}$"
+        },
+        "server_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]{1,63}$"
+        }
+      },
+      "required": [
+        "kind",
+        "profile_id",
+        "server_id"
+      ],
+      "additionalProperties": false
+    },
+    "ManagerApplyChangeInput": {
+      "type": "object",
+      "properties": {
+        "proposal_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "expected_revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "idempotency_key": {
+          "type": "string",
+          "minLength": 16,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "proposal_id",
+        "expected_revision",
+        "idempotency_key"
+      ],
+      "additionalProperties": false
+    },
+    "ManagerStatusOutput": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "ctmm.management.v1"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "live",
+            "snapshot",
+            "unavailable"
+          ]
+        },
+        "freshness": {
+          "$ref": "#/$defs/Freshness"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "overall_state": {
+              "type": "string",
+              "enum": [
+                "STOPPED",
+                "STARTING",
+                "CONNECTING",
+                "READY",
+                "DEGRADED",
+                "OFFLINE",
+                "FAILED",
+                "UNKNOWN"
+              ]
+            },
+            "service": {
+              "$ref": "#/$defs/ComponentStatus"
+            },
+            "tunnel": {
+              "$ref": "#/$defs/ComponentStatus"
+            },
+            "proxy": {
+              "$ref": "#/$defs/ComponentStatus"
+            },
+            "registry_revision": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "overall_state",
+            "service",
+            "tunnel",
+            "proxy",
+            "registry_revision"
+          ],
+          "additionalProperties": false
+        },
+        "errors": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/SafeError"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "request_id",
+        "observed_at",
+        "source",
+        "freshness",
+        "data",
+        "errors"
+      ],
+      "additionalProperties": false
+    },
+    "ManagerDiagnosticsOutput": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "ctmm.management.v1"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "live",
+            "snapshot",
+            "unavailable"
+          ]
+        },
+        "freshness": {
+          "$ref": "#/$defs/Freshness"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "items": {
+              "type": "array",
+              "maxItems": 50,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80
+                  },
+                  "component": {
+                    "type": "string",
+                    "enum": [
+                      "service",
+                      "tunnel",
+                      "proxy",
+                      "registry",
+                      "server"
+                    ]
+                  },
+                  "observed_at": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "severity": {
+                    "type": "string",
+                    "enum": [
+                      "info",
+                      "warning",
+                      "error"
+                    ]
+                  },
+                  "safe_message": {
+                    "type": "string",
+                    "maxLength": 500
+                  }
+                },
+                "required": [
+                  "code",
+                  "component",
+                  "observed_at",
+                  "severity",
+                  "safe_message"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "next_cursor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 256
+            }
+          },
+          "required": [
+            "items",
+            "next_cursor"
+          ],
+          "additionalProperties": false
+        },
+        "errors": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/SafeError"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "request_id",
+        "observed_at",
+        "source",
+        "freshness",
+        "data",
+        "errors"
+      ],
+      "additionalProperties": false
+    },
+    "ManagerListServersOutput": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "ctmm.management.v1"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "live",
+            "snapshot",
+            "unavailable"
+          ]
+        },
+        "freshness": {
+          "$ref": "#/$defs/Freshness"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "registry_revision": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "servers": {
+              "type": "array",
+              "maxItems": 100,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "server_id": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_-]{1,63}$"
+                  },
+                  "profile_id": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9_-]{1,63}$"
+                  },
+                  "alias": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 64
+                  },
+                  "desired_enabled": {
+                    "type": "boolean"
+                  },
+                  "observed_state": {
+                    "type": "string",
+                    "enum": [
+                      "STOPPED",
+                      "STARTING",
+                      "CONNECTING",
+                      "READY",
+                      "DEGRADED",
+                      "OFFLINE",
+                      "FAILED",
+                      "UNKNOWN"
+                    ]
+                  }
+                },
+                "required": [
+                  "server_id",
+                  "profile_id",
+                  "alias",
+                  "desired_enabled",
+                  "observed_state"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "next_cursor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 256
+            }
+          },
+          "required": [
+            "registry_revision",
+            "servers",
+            "next_cursor"
+          ],
+          "additionalProperties": false
+        },
+        "errors": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/SafeError"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "request_id",
+        "observed_at",
+        "source",
+        "freshness",
+        "data",
+        "errors"
+      ],
+      "additionalProperties": false
+    },
+    "ManagerSelftestOutput": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "ctmm.management.v1"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "live",
+            "snapshot",
+            "unavailable"
+          ]
+        },
+        "freshness": {
+          "$ref": "#/$defs/Freshness"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "suite": {
+              "type": "string",
+              "enum": [
+                "local_contract",
+                "registry_integrity",
+                "snapshot_freshness"
+              ]
+            },
+            "result": {
+              "type": "string",
+              "enum": [
+                "PASS",
+                "FAIL",
+                "INCONCLUSIVE"
+              ]
+            },
+            "checks": {
+              "type": "array",
+              "maxItems": 30,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 80
+                  },
+                  "result": {
+                    "type": "string",
+                    "enum": [
+                      "PASS",
+                      "FAIL",
+                      "INCONCLUSIVE"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "result"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "side_effects": {
+              "const": 0
+            }
+          },
+          "required": [
+            "suite",
+            "result",
+            "checks",
+            "side_effects"
+          ],
+          "additionalProperties": false
+        },
+        "errors": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/SafeError"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "request_id",
+        "observed_at",
+        "source",
+        "freshness",
+        "data",
+        "errors"
+      ],
+      "additionalProperties": false
+    },
+    "ManagerProposeChangeOutput": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "ctmm.management.v1"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "live",
+            "snapshot",
+            "unavailable"
+          ]
+        },
+        "freshness": {
+          "$ref": "#/$defs/Freshness"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "proposal_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "PROPOSED",
+                "REJECTED"
+              ]
+            },
+            "base_revision": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "change_digest": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "expires_at": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time"
+            },
+            "requires_local_approval": {
+              "const": true
+            },
+            "risk_tier": {
+              "type": "string",
+              "enum": [
+                "standard",
+                "elevated",
+                "prohibited"
+              ]
+            }
+          },
+          "required": [
+            "proposal_id",
+            "status",
+            "base_revision",
+            "change_digest",
+            "expires_at",
+            "requires_local_approval",
+            "risk_tier"
+          ],
+          "additionalProperties": false
+        },
+        "errors": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/SafeError"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "request_id",
+        "observed_at",
+        "source",
+        "freshness",
+        "data",
+        "errors"
+      ],
+      "additionalProperties": false
+    },
+    "ManagerApplyChangeOutput": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "ctmm.management.v1"
+        },
+        "request_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "live",
+            "snapshot",
+            "unavailable"
+          ]
+        },
+        "freshness": {
+          "$ref": "#/$defs/Freshness"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "proposal_id": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "outcome": {
+              "type": "string",
+              "enum": [
+                "DENIED",
+                "COMMITTED_PENDING_RECONCILE",
+                "RECONCILED",
+                "RECONCILE_FAILED",
+                "RECOVERY_REQUIRED"
+              ]
+            },
+            "registry_revision": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "operation_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 128
+            },
+            "reason_code": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 80
+            }
+          },
+          "required": [
+            "proposal_id",
+            "outcome",
+            "registry_revision",
+            "operation_id",
+            "reason_code"
+          ],
+          "additionalProperties": false
+        },
+        "errors": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {
+            "$ref": "#/$defs/SafeError"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "request_id",
+        "observed_at",
+        "source",
+        "freshness",
+        "data",
+        "errors"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
