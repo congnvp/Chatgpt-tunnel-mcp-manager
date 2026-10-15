@@ -191,3 +191,16 @@
 - Status: PROPOSED SECURITY DOCUMENT, P00-01D RESEARCH_DOCUMENTED (subject to mirror readback); product NOT IMPLEMENTED. Paired Obsidian note/log/state and SHA verification pending.
 - Git commit: this commit.
 - Next: mirror Obsidian note/event, verify SHA and both logbooks; hand off TB-04/06 approval and boot-secrets questions to ADR-CTMM-003/004/006; design fixture/evidence contract QA-P00-02, no running tests before explicit permission.
+
+
+### CTMM-20261016-061 — TUNNEL PROVENANCE AND OFFLINE COMPARISON GATE SPECIFICATION
+- Time: 2026-10-16 04:38:01 Asia/Bangkok; actor: ChatGPT / Tunnel workstream; repository and Obsidian accessed through authorized connectors.
+- Action: continue CTMM-TASK-P00-01B with pinned official v0.0.16 vs third-party Rust otunnel v0.2.0 provenance/license/lockfile evidence; prepare an isolated offline fake-control-plane and differential acceptance plan with OFF-01..OFF-16, explicit negative checks, rollback and human approval gates. No ADR accepted, compilation or tunnel test performed.
+- Git paths: `docs/research/TUNNEL-PROVENANCE-OFFLINE-TEST-GATES-2026-10-16.md`, `LOGBOOK.md`.
+- Obsidian paired paths: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Research/Tunnel-Provenance-and-Offline-Test-Gates-2026-10-16.md`, `Logbook.md`, `Project-State.md`.
+- Requirements/task: V1-R01/R02/R03/R08/R09, Q03A/Q04A/Q08A, CTMM-TASK-P00-01B, ADR-CTMM-001/003/004/006 PROPOSED/OPEN.
+- Evidence: official upstream GitHub v0.0.16 release 67 assets, README signature validation and Apache-2.0; otunnel v0.2.0 GitHub release six digest-labelled archives, Cargo.lock, MIT, CI release workflow. Source/metadata evidence ONLY. Cargo build, download hash validation, Sigstore verify, SPDX audit, offline fixture, host/network, auth, ChatGPT E2E NOT RUN. No secrets or active tunnel/proxy/service modifications.
+- Concurrent logbook finding: other workstream event 030 was Git SYNC_PENDING; Obsidian event 030 was subsequently observed after readback. No alteration of its append-only Git history.
+- Git report commit: [82c02cf5f4483e213113e9c7120ec87585809f9e](https://github.com/congnvp/Chatgpt-tunnel-mcp-manager/commit/82c02cf5f4483e213113e9c7120ec87585809f9e). Git paired-logbook commit: this commit.
+- State: DOCUMENTATION PROPOSED, release metadata VERIFIED BY SOURCE, artifact-bytes/provenance TEST NOT RUN, Rust runtime compatibility UNVERIFIED, implementation gate BLOCKED. Paired Obsidian write/readback pending.
+- Next: mirror event in Obsidian with actual SHA, verify dual logbooks and research note. Operator/Architecture to approve ADR and authorize sandbox fixture test separately; no production cutover.
