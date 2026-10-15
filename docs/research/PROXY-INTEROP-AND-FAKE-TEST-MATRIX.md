@@ -5,7 +5,7 @@ Scope: V1-R03/R04/R05/R06/R08/R09; P00-01E research, future P04 protocol proxy. 
 
 ## Findings from official specifications
 
-Current stable MCP revision: 2026-07-28 (official releases). Major incompatibility boundary: revisions <=2025-11-25 use initialize + notifications/initialized, session-scoped capabilities and versions. Revision 2026-07-28 instead requires per-request params._meta protocolVersion/clientCapabilities, offers optional server/discover, has no protocol-level session, and uses request-scoped streams/subscriptions/listen and multi-round-trip result shapes. A JSON-RPC forwarding layer alone is not a compatibility layer.
+Current stable MCP revision: 2026-07-28 (official releases). Major incompatibility boundary: revisions <=2025-11-25 use initialize + notifications/initialized, session-scoped capabilities and versions. Revision 2026-07-28 instead requires per-request params._meta keys io.modelcontextprotocol/protocolVersion and io.modelcontextprotocol/clientCapabilities; modern SERVERS MUST implement server/discover, while CLIENTS MAY call it (dual-era stdio clients SHOULD probe). Modern transport has no protocol-level session and uses request-scoped streams/subscriptions/listen and multi-round-trip result shapes. See corrective addendum PROXY-NEGOTIATION-CORRECTION-2026-10-16.md. A JSON-RPC forwarding layer alone is not a compatibility layer.
 
 Transport contract:
 - stdio: one UTF-8 JSON-RPC frame per line on stdin/stdout; child stderr is logging. Never pass non-MCP text on stdout. Isolate subprocess and bound stdout, stderr, restart, resource usage.

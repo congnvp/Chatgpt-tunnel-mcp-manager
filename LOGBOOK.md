@@ -204,3 +204,14 @@
 - Git report commit: [82c02cf5f4483e213113e9c7120ec87585809f9e](https://github.com/congnvp/Chatgpt-tunnel-mcp-manager/commit/82c02cf5f4483e213113e9c7120ec87585809f9e). Git paired-logbook commit: this commit.
 - State: DOCUMENTATION PROPOSED, release metadata VERIFIED BY SOURCE, artifact-bytes/provenance TEST NOT RUN, Rust runtime compatibility UNVERIFIED, implementation gate BLOCKED. Paired Obsidian write/readback pending.
 - Next: mirror event in Obsidian with actual SHA, verify dual logbooks and research note. Operator/Architecture to approve ADR and authorize sandbox fixture test separately; no production cutover.
+
+### CTMM-20261016-090 — PROXY NORMATIVE NEGOTIATION CORRECTION
+- Time: 2026-10-16 04:39:20 Asia/Bangkok; actor: ChatGPT / Proxy workstream via GitHub and Ubun.
+- Action: Correct ambiguous 2026 MCP server/discover obligation and exact namespaced _meta keys in prior CTMM-012 proxy study; introduce source-backed modern/legacy stdio/HTTP negotiation contract, HTTP header/body + x-mcp-header semantics, resultType/error state oracle and fourteen PN-01..PN-14 fixture test cases. This supersedes inaccurate wording but does not mutate prior append-only log events; no ADR accepted.
+- Git paths: `docs/research/PROXY-INTEROP-AND-FAKE-TEST-MATRIX.md`, `docs/research/PROXY-NEGOTIATION-CORRECTION-2026-10-16.md`, `LOGBOOK.md`.
+- Obsidian paired paths: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Research/Proxy-Interop-and-Fake-Test-Matrix-2026-10-16.md`, `Research/Proxy-Negotiation-Correction-2026-10-16.md`, `Logbook.md` (under same project root).
+- Requirements/ADR/Task: V1-R03/R04/R05/R06/R08/R09, Q07A/Q08A, P00-01E research, future P04; protocol ADR still PROPOSED.
+- Evidence: official MCP 2026-07-28 overview, versioning, server/discover, stdio and Streamable HTTP primary specs; original docs + two logbooks read, event-030 sync recovery mirrored. Documentation review only; all PX-01..PX-30 and PN-01..PN-14 runtime cases NOT RUN; no Rust build/security/tunnel E2E.
+- Security: no credentials, binary execution, production tunnel/MCP/service change, no unauthorized approvals; publicly safe sanitized docs only.
+- Git commit: this commit.
+- Status: CORRECTION PROPOSED / DOCUMENT RESEARCH; product NOT IMPLEMENTED and protocol compatibility NOT VERIFIED. Next: Obsidian mirror and paired readback, PM/Architecture ADR review; no fixture execution before approval.
