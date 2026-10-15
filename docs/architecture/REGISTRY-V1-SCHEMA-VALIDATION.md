@@ -1,7 +1,11 @@
 # CTMM Registry V1 — structural schema + validation gates
 Status: PROPOSED / DOCUMENTATION CONTRACT / NOT AN ACCEPTED ADR
-Event: CTMM-20261016-030 · Task: RS-D01 · Date: 2026-10-16 (Asia/Bangkok)
+Event: CTMM-20261016-040 · Task: RS-D01 · Date: 2026-10-16 (Asia/Bangkok)
 Related: V1-R04/R06/R07/R08/R09; ADR-CTMM-002/004/005/006/007 PROPOSED; D-ARCH-02/04/06 OPEN.
+
+## Event-ID correction (concurrent writers)
+- The first three Registry Git commits were initially labeled `CTMM-20261016-030` while another workstream independently acquired that same ID for Self-management MCP. **`CTMM-20261016-030` remains owned by Self-management.** Registry is reassigned exclusively to `CTMM-20261016-040` in this corrective document and both append-only logbooks; original immutable commit messages cannot be edited. No Self-management document or event is modified.
+- Registry origin commits: schema `8d738779354703de98a539263167dd607f467824`, example `101a1dbd0ab6bb7949cd40776b01d3d8eeb38952`, validation document `8187db02d5337de9bee86884d9e9fa80b1fb6f87`. Their prior event label is a provenance correction only, not an accepted decision or product change.
 
 ## Source files (schema, not application code)
 - `docs/architecture/schemas/registry-v1.proposed.schema.json` — strict Draft 2020-12 desired-state structural validator candidate.
