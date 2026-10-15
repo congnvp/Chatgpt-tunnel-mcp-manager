@@ -83,3 +83,15 @@
 - Status: RESEARCH / PROPOSED; Rust service unaffected; production NOT IMPLEMENTED.
 - Git commit: this commit.
 - Next: obtain accepted GUI+IPC ADR and isolate mock snapshot tests; no importing old C PoC.
+
+### CTMM-20261016-012 — PROXY PROTOCOL RESEARCH AND FAKE TEST MATRIX
+- Time: 2026-10-16 04:10:43 Asia/Bangkok; actor: ChatGPT / Proxy workstream through authorized GitHub/Ubun connectors.
+- Action: Source-backed MCP stable 2026-07-28 and handshake-era survey; propose version/capability negotiation, namespace/collision, tools/resources/prompts routing, authentication boundary, stdio supervision, timeout/cancellation/error contract, six fake fixture types and PX-01..PX-30 test matrix. No ADR approved.
+- Git paths: `docs/research/PROXY-INTEROP-AND-FAKE-TEST-MATRIX.md`, `LOGBOOK.md`.
+- Obsidian paths paired: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Research/Proxy-Interop-and-Fake-Test-Matrix-2026-10-16.md`, `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Logbook.md`.
+- Related: V1-R03/R04/R05/R06/R08/R09; CTMM-TASK-P00-01E (research candidate); P04 blocked until ADR approval and P02 isolated test.
+- Evidence: official MCP releases/specification, official Rust rmcp and OpenAI tunnel references in research doc. Baseline Git/Obsidian logs checked. Documentation research only; all 30 fixtures/cases NOT RUN; no compilation, runtime or network evidence.
+- Protection: no API keys/credentials, no existing tunnel/MCP Proxy/service/config changed; public repo contains only synthetic fixture descriptions.
+- Git commit: this commit.
+- Status: PROPOSED; application NOT IMPLEMENTED, interoperability NOT VERIFIED; dual-log Obsidian mirror to follow.
+- Next: PM/Architecture decide protocol/security/SDK and P00 scope; approve ADR before coding and isolated test fixtures.
