@@ -118,3 +118,15 @@
 - Acceptance: P00-01A public-document research complete when Git/Obsidian paired readback verified; status RESEARCH_DOCUMENTED, not account VERIFIED, not test PASS. Parent P00-01 and P01+ implementation gate remain OPEN/BLOCKED. Rollback: correction event in both append-only logbooks; do not alter production.
 - git_commit: this commit (Git research doc earlier committed separately as above).
 - Next: pair Obsidian note, DAG amendment, Project-State and logbook with SHA of this commit; verify readback. P00-01B official tunnel binary provenance/license remains READY, next unassigned candidate. ADR approvals and isolated execution authorization still required.
+
+### CTMM-20261016-022 — RUST OTUNNEL VS OFFICIAL V0.0.16 SOURCE AUDIT
+- Time: 2026-10-16 04:26:42 Asia/Bangkok; actor: ChatGPT / Tunnel workstream; scope: CTMM-TASK-P00-01B, source comparison only.
+- Action: inspected official openai/tunnel-client v0.0.16 release/diff/docs and zetaloop/otunnel v0.2.0 Rust source/release. Identified optional v0.0.16 resp_timing/forward_trace_context gaps, strict profile schema, embed-health feature boundary, release provenance differences and README semver-pin mismatch. Prepared ADR-CTMM-001 addendum PROPOSED and eight test gates; no ADR accepted.
+- Git paths: `docs/research/OTUNNEL-V020-VS-OFFICIAL-V0016-2026-10-16.md`, `LOGBOOK.md`.
+- Obsidian paired paths: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Research/Rust-Tunnel-Compatibility-2026-10-16.md`, `Logbook.md`, `Project-State.md`.
+- Requirements/tasks: V1-R01/R02/R03/R08/R09, Q03A/Q04A/Q08A, CTMM-TASK-P00-01B, ADR-CTMM-001 (candidate addendum).
+- Evidence/tests: official immutable release 0.0.16 and repo diff vs 0.0.15; otunnel v0.2.0 tagged source + release metadata; static audit only. Build, cargo tests, signature/artifact-byte verification, account permission, tunnel or ChatGPT E2E: NOT RUN.
+- Security: no key, binary download, external program run, active tunnel/proxy/service or existing runtime modified.
+- Git commit: document commit; paired Git LOGBOOK commit is this commit.
+- Status: DOC RESEARCH ONLY / Rust E2E compatibility UNVERIFIED / ADR PROPOSED; paired Obsidian readback pending.
+- Next: independent review 01B findings; decide the ADR after sandbox compatibility tests are approved. No P01/P02 implementation before approvals.
