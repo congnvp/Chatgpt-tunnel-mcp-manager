@@ -24,3 +24,16 @@
 - Status: documentation baseline `VERIFIED`; software `NOT IMPLEMENTED/NOT TESTED`.
 - git_commit: this commit.
 - Next: new discovery sessions in ChatGPT Project; maintain paired logs.
+
+### CTMM-20261016-003 — UBUNTU TRAY PANEL DISCOVERY SPIKE
+- Time: 2026-10-16 03:03 Asia/Bangkok; actor: ChatGPT via authorized Ubun and GitHub connectors.
+- Scope/action: User-authorized isolated GNOME tray/AppIndicator + GTK3 floating panel PoC, built to AppImage on Ubuntu 26.04.1 LTS (x86_64, Wayland). This is a discovery spike only; not Rust core, accepted GUI ADR, or production implementation.
+- Git paths changed: `LOGBOOK.md` (this event only; experimental code deliberately remains outside main project repository).
+- Obsidian paths in paired change-set: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Logbook.md`, `Project-State.md`, `Research/Ubuntu-Tray-AppImage-Spike-2026-10-16.md` (paths below project root where abbreviated).
+- Ubuntu PoC paths: `/home/congnvp-su/Projects/CTMM-Tray-Panel-Spike/src/main.c`, `build.sh`, `README.md`, `build/ctmm-tray-demo`, `build/CTMM-Tray-Demo.AppDir/`, `build/live-demo.log`, `tools/appimagetool-x86_64.AppImage`, `dist/CTMM-Tray-Demo-x86_64.AppImage`; distributable copy `/home/congnvp-su/Applications/CTMM-Tray-Demo-x86_64.AppImage`.
+- Requirement/task: Discovery on Ubuntu tray UX and AppImage feasibility; Q01-Q08 and product GUI/packaging decisions remain OPEN. Rust core requirement unchanged.
+- Evidence/tests: GCC `-Wall -Wextra -Werror` build successful; native GTK+indicator smoke exit=0; packaged AppImage smoke exit=0; GNOME Ubuntu AppIndicators extension ACTIVE; `org.kde.StatusNotifierWatcher.RegisteredStatusNotifierItems` contains `ctmm_tray_spike`; live process PID 16064 at observation. AppImage 1116664 bytes, SHA256 `778067cbab2065a8ca23daa7bed62619f98cdbf4d85a25bd7b33c9a1a067e91c`. Menu clicking and rich panel visual placement: NOT YET MANUALLY TESTED. Cross-distro portability: NOT TESTED.
+- Security/limits: no tunnel, MCP Proxy, daemon, service or system configuration changed; no package installation. Uses deprecated GTK Ayatana interface, host GTK3; GNOME native menu shown on icon click, separate GTK panel selected from menu; Wayland does not guarantee arbitrary window coordinates.
+- Status: experimental build/registration smoke VERIFIED; production gate remains DISCOVERY, NOT READY FOR IMPLEMENTATION.
+- git_commit: this commit.
+- Next: paired Obsidian event + research note + state readback; continue Q01–Q08 and evaluate modern SNI/API options before ADR.
