@@ -142,3 +142,16 @@
 - Status: SYNC_PENDING — proposed documentation committed and Obsidian architecture note created, but the mandatory Obsidian `Logbook.md` event append was blocked by intermittent connector initialization/safety failures; Git docs and JSON Schema readback succeeded. Product NOT IMPLEMENTED. Do NOT mark dual-log VERIFIED until the paired Obsidian event is appended and both logs are reread.
 - git_commit: this commit.
 - Next: mirror Obsidian note/event with actual SHA, re-read both logbooks; seek ADR-CTMM-004/006 selection before implementation.
+
+
+### CTMM-20261016-040 — REGISTRY V1 STRUCTURAL SCHEMA AND EVENT-ID COLLISION CORRECTION
+- Time: 2026-10-16T04:31:55+07:00; actor: ChatGPT / Registry-Settings workstream via authorized GitHub+Ubun connectors.
+- Scope/action: Continued RS-D01. Authored *proposed only* JSON Schema Draft 2020-12 for desired Registry state and inert disabled stdio+HTTP example; documented structural-vs-trusted-semantic validation, approval/revision/generation contract, import/export secret isolation and Q03A/Q05A/Q06A/Q07A/Q08A alignment. No runtime code and no ADR acceptance.
+- Event-ID conflict/correction: initial Registry source commits inadvertently used CTMM-20261016-030 in commit titles while concurrent Self-management MCP workstream independently reserved/wrote the official CTMM-20261016-030 log entry. That event belongs to Self-management and was NOT modified. This Registry change-set is exclusively CTMM-20261016-040; original immutable Git commit messages remain as provenance, with corrected document header and explicit audit trail. No force push or history rewrite.
+- Git paths changed: `docs/architecture/schemas/registry-v1.proposed.schema.json`, `docs/architecture/examples/registry-v1.inert-example.json`, `docs/architecture/REGISTRY-V1-SCHEMA-VALIDATION.md`, `LOGBOOK.md`.
+- Obsidian paired paths: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Architecture/Registry-V1-Schema-Validation.md`, `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Logbook.md`.
+- Requirements/tasks: V1-R04/R06/R07/R08/R09, RS-D01; Q03A..Q08A confirmed product requirements; ADR-CTMM-002/004/005/006/007 still PROPOSED.
+- Evidence: `Draft202012Validator.check_schema` succeeded against exact Git schema; evaluated exact Git example and 16 mutated negatives on Ubuntu, output `SCHEMA_CHECK_VALID; CASES=17; MATCH=17; MISMATCH=0`. This verifies *only structural schema cases*; trusted semantic checks V-01..V-14, RS-01..RS-18, authorization, secret store, Rust, tunnel and E2E NOT RUN. No credentials, binaries, services, active tunnel or proxy altered.
+- Git commits: schema `8d738779354703de98a539263167dd607f467824`; example `101a1dbd0ab6bb7949cd40776b01d3d8eeb38952`; original validation doc `8187db02d5337de9bee86884d9e9fa80b1fb6f87`; corrective doc `9694e2b1138026e659cc4db1d213667f8787fa29`; Git logbook: this commit.
+- Status: STRUCTURAL DOCUMENT SMOKE VERIFIED; Registry contract PROPOSED, NOT ACCEPTED/IMPLEMENTED; Obsidian paired documentation sync pending readback.
+- Next: mirror documentation and event to Obsidian with same CTMM-20261016-040 and SHA; verify both Git/Obsidian logs. Then RS-D02 permission matrix and RS-D03 sanitized export envelope pending ADR-CTMM-006 security decisions.
