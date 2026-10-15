@@ -37,3 +37,14 @@
 - Status: experimental build/registration smoke VERIFIED; production gate remains DISCOVERY, NOT READY FOR IMPLEMENTATION.
 - git_commit: this commit.
 - Next: paired Obsidian event + research note + state readback; continue Q01–Q08 and evaluate modern SNI/API options before ADR.
+
+### CTMM-20261016-004 — V1 REQUIREMENTS AND REPOSITORY PLANNING BASELINE
+- Time: 2026-10-16 03:34 Asia/Bangkok; actor: ChatGPT via GitHub/Ubun. Requested and authorized: document-only repository tree, module rules, user-stated V1 product baseline, workflow prompts and incremental execution plan.
+- Git paths: `LOGBOOK.md`; `docs/requirements/V1-SCOPE.md`; `docs/architecture/REPOSITORY-LAYOUT-PROPOSAL.md`; `docs/engineering/MODULE-RULES.md`; `docs/plans/V1-MILESTONES.md`; `docs/workflows/CHAT-PROMPTS.md`; `docs/workflows/RECOVERY-AND-LOGGING.md`; `docs/adr/README.md`; `crates/README.md`; `apps/README.md`; `tests/README.md`; `fixtures/README.md`; `packaging/README.md`.
+- Obsidian paths: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Logbook.md`, `Project-State.md`, `Requirements/Questions.md`, `Requirements/V1-Baseline.md`, `Architecture/Repository-Layout-Proposal.md`, `Planning/V1-Milestones.md`, `Documentation/Chat-Workstreams-V1.md`.
+- Requirement/ADR/task: V1-R01..V1-R09; Discovery Q01..Q08 updated with new inputs; all implementation-related ADRs still OPEN; next P00/CTMM-TASK-P00-01 research/gate.
+- Evidence: checked official OpenAI Secure MCP Tunnel, Rust SDK, Cargo layout, MCP Apps and OpenAI MCP server documents; Git and Obsidian initial readbacks; documentation consistency/readback only. Rust build/integration/service/tunnel tests NOT RUN; no executable created.
+- Protection: no credentials provided, recorded or requested; no changes to existing tunnel, MCP Proxy, Ubuntu service or previous tray PoC. Docs and placeholder README files only; code folders reserved for post-ADR gate.
+- Decision: Rust core, Ubuntu first then Windows, headless service plus optional unified GUI, self-management MCP, compatibility-focused proxy, progressive visible test slices constitute new user requirements; specific GUI, SDK, IPC, service mechanisms and distribution remain unapproved.
+- Status: doc plan PROPOSED, product NOT IMPLEMENTED; git_commit: this commit.
+- Pending/next: mirror notes and current SHA to Obsidian, readback paired logs, confirm blocking ADRs and begin P00 Discovery prior to Rust coding.
