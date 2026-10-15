@@ -61,3 +61,14 @@
 - Git commit: this commit.
 - Status: PM plan PROPOSED, task delegation RECORDED ONLY; project Intake/Discovery, NOT READY FOR IMPLEMENTATION. Dual-log mirror to verify after Obsidian write.
 - Next: Tunnel/CHAT-02 researches official public tunnel eligibility/permissions in a one-page source-backed checklist, recording VERIFIED/UNKNOWN/BLOCKED with citation and date; no login, credentials or tunnel mutation. PM rechecks event/branch/acceptance before next task.
+
+
+### CTMM-20261016-010 — REGISTRY / SETTINGS DISCOVERY CONTRACT (PROPOSED)
+- Time: 2026-10-16 04:04 Asia/Bangkok; actor: ChatGPT, Registry/Settings workstream, via authorized GitHub/Ubun connectors.
+- Scope/action: Wrote new clean-room draft defining per-server profiles, versioned desired-state contract, transport-specific validation, secret references, controlled enable/disable, sanitized portable import/export, transactional rollback, audit, read-only/local-editable/AI-proposed field matrix, optional MCP Apps UI, 18 negative/positive test cases, and dependency/ADR gates. No implementation or accepted ADR.
+- Git paths changed: `docs/architecture/REGISTRY-SETTINGS-PROPOSAL.md`, `LOGBOOK.md`. Obsidian paired paths: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Architecture/Registry-Settings-Proposal.md`, `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Logbook.md`.
+- Requirements/Tasks: V1-R04/R06/R07/R08/R09; P05; proposed RS-D01..RS-D04. D-ARCH-02/04/06 remain OPEN. No product code.
+- Tests/evidence: official MCP server and MCP Apps reference documents inspected; existing V1 scope/plan/logbooks read; documentation readback checked. Schema validation, tests RS-01..RS-18, runtime, security and ChatGPT E2E: NOT RUN. No secrets captured or service/tunnel/proxy touched.
+- Git commit: document commit `242efb27e2df9efe380b535a9fcb780a7b81c925`; paired Git-logbook commit is this commit.
+- Status: PROPOSED DOCUMENT ONLY; pending Obsidian mirror/readback; product NOT IMPLEMENTED.
+- Next: paired Obsidian note/event, verify both logs and draft, route dependency decisions to Requirements/Architecture workstream before P05 implementation.
