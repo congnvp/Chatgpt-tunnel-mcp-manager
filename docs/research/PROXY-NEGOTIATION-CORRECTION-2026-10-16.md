@@ -34,7 +34,7 @@ Modern M = protocol 2026-07-28 or later, per-request metadata; Legacy L = 2025-1
 
 A legal example request for a modern server, not an on-host packet capture:
 
-\`\`\`json
+```json
 {
   "jsonrpc": "2.0",
   "id": "proxy-discover-1",
@@ -50,7 +50,7 @@ A legal example request for a modern server, not an on-host packet capture:
     }
   }
 }
-\`\`\`
+```
 
 HTTP equivalent request headers (synthetic only): MCP-Protocol-Version: 2026-07-28, Mcp-Method: server/discover. For tools/call add Mcp-Name from params.name. For non-header-safe values use the specification's exact =?base64?...?= sentinel; ambiguous literal sentinel must also be encoded. x-mcp-header is a mandatory-to-support client feature when a backend tool schema advertises it, and invalid definitions MUST be excluded from tools/list. Do not simply ignore this feature and claim full modern HTTP compliance.
 

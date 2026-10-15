@@ -215,3 +215,15 @@
 - Security: no credentials, binary execution, production tunnel/MCP/service change, no unauthorized approvals; publicly safe sanitized docs only.
 - Git commit: this commit.
 - Status: CORRECTION PROPOSED / DOCUMENT RESEARCH; product NOT IMPLEMENTED and protocol compatibility NOT VERIFIED. Next: Obsidian mirror and paired readback, PM/Architecture ADR review; no fixture execution before approval.
+
+### CTMM-20261016-100 — PROXY JSON EXAMPLE MARKDOWN FENCE CORRECTION
+- Time: 2026-10-16 04:42:35 Asia/Bangkok; actor: ChatGPT / Proxy workstream.
+- Action: Correct two escaped Markdown code fences in the CTMM-20261016-090 normative research addendum, without changing the JSON-RPC request body or protocol assertions. This is a formatting-only correction, not a new architecture decision.
+- Git paths: `docs/research/PROXY-NEGOTIATION-CORRECTION-2026-10-16.md`, `LOGBOOK.md`.
+- Obsidian paired paths: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Logbook.md`; existing `Research/Proxy-Negotiation-Correction-2026-10-16.md` is referenced/read-only, not modified.
+- Requirements/tasks: V1-R05 / P00-01E; same proposed protocol/negotiation contract as event CTMM-20261016-090.
+- Evidence: code fence pair verified; embedded modern request JSON parsed by JSON.parse, required namespaced _meta protocolVersion and clientCapabilities present. All PN-01..14 and PX-01..30 protocol tests NOT RUN; no Rust build or tunnel E2E.
+- Git commit: this commit.
+- Security: no secret or runtime activity; no production stack modified.
+- Status: DOCUMENTATION EXAMPLE FORMATTING CORRECTED; dual-log Obsidian mirror to verify, ADR still PROPOSED and software NOT IMPLEMENTED.
+- Next: read back both logbooks, Markdown/example and flags; PM/Architecture reviews before any isolated test execution.
