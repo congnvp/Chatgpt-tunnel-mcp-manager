@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "registry_revision": 0,
+  "profiles": [
+    {
+      "profile_id": "isolated-lab",
+      "display_name": "Isolated laboratory",
+      "activation_policy": "manual"
+    }
+  ],
+  "servers": [
+    {
+      "server_id": "srv-lab-echo",
+      "profile_id": "isolated-lab",
+      "alias": "echo",
+      "display_name": "Echo fake MCP",
+      "enabled": false,
+      "transport": {
+        "kind": "stdio",
+        "executable": "/opt/ctmm-test/bin/echo-mcp",
+        "args": [
+          "--fake"
+        ],
+        "working_directory": "/opt/ctmm-test"
+      },
+      "secret_bindings": [
+        {
+          "target": "env",
+          "name": "EXAMPLE_TOKEN",
+          "secret_ref": "secret://ctmm/isolated-lab/echo-token"
+        }
+      ],
+      "execution": {
+        "startup_timeout_ms": 10000,
+        "request_timeout_ms": 30000,
+        "max_concurrent_requests": 4,
+        "restart_policy": "on_failure"
+      },
+      "exposure": {
+        "tools": true,
+        "resources": false,
+        "prompts": false
+      }
+    },
+    {
+      "server_id": "srv-lab-remote",
+      "profile_id": "isolated-lab",
+      "alias": "remote",
+      "display_name": "Inert HTTP example",
+      "enabled": false,
+      "transport": {
+        "kind": "streamable_http",
+        "url": "https://example.invalid/mcp"
+      },
+      "secret_bindings": [],
+      "execution": {
+        "startup_timeout_ms": 10000,
+        "request_timeout_ms": 30000,
+        "max_concurrent_requests": 4,
+        "restart_policy": "never"
+      },
+      "exposure": {
+        "tools": true,
+        "resources": false,
+        "prompts": false
+      }
+    }
+  ]
+}
