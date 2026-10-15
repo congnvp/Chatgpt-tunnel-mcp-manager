@@ -48,3 +48,16 @@
 - Decision: Rust core, Ubuntu first then Windows, headless service plus optional unified GUI, self-management MCP, compatibility-focused proxy, progressive visible test slices constitute new user requirements; specific GUI, SDK, IPC, service mechanisms and distribution remain unapproved.
 - Status: doc plan PROPOSED, product NOT IMPLEMENTED; git_commit: this commit.
 - Pending/next: mirror notes and current SHA to Obsidian, readback paired logs, confirm blocking ADRs and begin P00 Discovery prior to Rust coding.
+
+### CTMM-20261016-005 — PM DEPENDENCY TRIAGE AND TUNNEL PREFLIGHT HANDOFF
+- Time: 2026-10-16 04:02 Asia/Bangkok; actor: ChatGPT, Integration/PM, using authorized GitHub/Ubun connectors.
+- Action: read current USES protocol, Project-State, paired logbooks, V1 milestone/task plan, ADR README and workstream prompts; inspect Git branch/PR/issue surface and Ubuntu project path. Build proposed task dependency DAG and assign one smallest documentation-only READY task, CTMM-TASK-P00-01A, to workstream Tunnel/CHAT-02 (handoff through Obsidian dossier, not a new chat or an active execution). No implementation/architecture ADR acceptance.
+- Git paths changed: `LOGBOOK.md` only.
+- Obsidian paths in paired change-set: `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Logbook.md`, `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Project-State.md`, `20_Projects/Active/Chatgpt-tunnel-mcp-manager/Planning/Task-Dependencies.md`.
+- Requirements/tasks: V1-R02, V1-R03, V1-R09, Q04, Q05, Q08; parent CTMM-TASK-P00-01; subtask CTMM-TASK-P00-01A (READY_ASSIGNED, NOT STARTED). All technology ADRs still OPEN.
+- Dependencies: independent P00 desk research -> separate core/tunnel/GUI ADR and user approval gates -> P01 core -> P02 isolated tunnel+mock MCP -> parallel P03 manager MCP / P04 routing -> P05 registry -> P06 optional UI and P07 Ubuntu operations -> P08 Windows; cutover only by separate authorization. Canonical DAG, acceptance/negative checks, owner-role and rollback recorded in Obsidian Planning/Task-Dependencies.md.
+- Preflight: last both logbooks CTMM-20261016-004; Git main head d4b5d308e083d044ee3f628e75ade4802e570817; one visible main branch, no open PR/issue returned; planned Ubuntu source path NOT_FOUND; no workstream update files found in project Obsidian tree. No observed branch or event collision; Git main may change, recheck prior to subsequent writes.
+- Conflict/risk register: acceptance gates and user confirmation for tech ADR pending; account/org tunnel entitlement UNKNOWN; runtime credentials not provisioned for test; public repo permits NO secrets; no active tunnel/proxy/service touched. Documentation review/readback only, no runtime/security/permission verification, no compilation/tests (NOT RUN).
+- Git commit: this commit.
+- Status: PM plan PROPOSED, task delegation RECORDED ONLY; project Intake/Discovery, NOT READY FOR IMPLEMENTATION. Dual-log mirror to verify after Obsidian write.
+- Next: Tunnel/CHAT-02 researches official public tunnel eligibility/permissions in a one-page source-backed checklist, recording VERIFIED/UNKNOWN/BLOCKED with citation and date; no login, credentials or tunnel mutation. PM rechecks event/branch/acceptance before next task.
